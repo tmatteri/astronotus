@@ -4,8 +4,8 @@ PASOS
 
 1 ) HACER QUE LA CARPETA DEL PROYECTO SEA .Git (Git init)
 
-2 ) Agregar un archivo al proyecto (git add "ArchivoNuevo.txt")
+2 ) Agregar un archivo al proyecto (git add "ArchivoNuevo.txt") | (git add .) agrega todo
 
 3 ) Hacer commit (genera la version local) (git commit -m "Esto es el comentario del commit")
 
-4 ) Hacer el push al github (git remote push astronotus) 
+4 ) Hacer el push al github (git push astronotus master) donde astronotus es el repositorio remoto y master el branch 
