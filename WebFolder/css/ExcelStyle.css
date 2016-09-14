@@ -1,0 +1,344 @@
+@charset "UTF-8";
+
+
+* { margin: 0; padding: 0; }
+
+body {
+	font-size: 62.5%;
+	font-family: verdana, arial, sans-serif;
+}
+
+		
+.query { 
+		position: relative;
+		top: 0px;
+		border: 1px solid #000000;
+		font-family: verdana, arial, sans-serif; 
+		font-size: 9px; 
+		padding: 0px; 
+		color:black; 
+		width:200;
+		height:14;
+		text-align: inherit;
+		}
+		
+Input { 
+		position: relative;
+		top: 0px;
+		border: none; 
+		font-family: verdana, arial, sans-serif; 
+		font-size: 9px; 
+		padding: 0px; 
+		color:black; 
+		width:inherit;
+		height:15;
+		text-align: inherit;
+		}
+		
+Input.ctr_num{ width:100; }
+
+th{ height: 30px; }
+
+.SelectType {
+border-style: hidden; 
+font-family: verdana, arial, sans-serif; 
+font-size: 10px; 
+background-color: #FFFFFF;
+color: #000000;
+height: 15px;
+width: 80px;
+
+}
+	
+#printed{width: 75px;}
+
+#tabs{ top: 250px; height: 200px; width: 350px; }
+
+#LogoEmpresa{ position: fixed; top: 100px ; left: 100px; z-index: -9999}
+
+#menu_body{ top: 30px; position: fixed; height: 810px; width: 1673px; background: #fef1ec url(warp.jpg) 100% 100% repeat-x; z-index: -999999999999 }
+
+#Enterprise{ bottom: 2px;}
+
+#EspacioTop {height: 29px; width: 100%;}
+
+#barraTop {position: fixed;top: 0px; height: 30px; width: 100%; background: #d0e5f5 url(ui-lightness/images/ui-bg_glass_75_d0e5f5_1x400.png) 50% 50% repeat-x; z-index: 99999999999999999999999999999 }
+
+#titulo_barratop { position: fixed; font-family: verdana, arial, sans-serif; font-size: 18px; padding: 0px;}
+
+#botoneraTop { position: fixed; left: 225px; }
+
+.botonX {width: 100px; top: 2px ; bottom: 2px;}
+
+#salir{position: absolute; left: 96%;top: 2px; bottom: 2px; }
+
+#ViewUser{ position: absolute; left: 88%;bottom: 2px; }
+
+.PaletColors{ position: fixed; left: 1px; top: 29px; z-index: 9}
+
+.PieIframe{ border-style: hidden; position: fixed; left: 1px; top: 52px; z-index: 9}
+
+.PieIframe2{ position: fixed; left: 1px; top: 394px; z-index: 9}
+
+.white{ border: 1px solid #111111; background: #ffffff; color: #111111; }
+
+.red{  background: #e4a0a0 url(ui-lightness/images/ui-bg_highlight-hard_100_e4a0a0_1x100.png) 50% 50% repeat-x; color: #111111; }
+
+.fuxia{background: #eda6d2 url(ui-lightness/images/ui-bg_highlight-hard_100_eda6d2_1x100.png) 50% 50% repeat-x; color: #111111; }
+
+.turquesa { background: #7eedac url(ui-lightness/images/ui-bg_highlight-hard_100_7eedac_1x100.png) 50% 50% repeat-x; color: #111111; }
+
+.lila { background: #fc54d9 url(ui-lightness/images/ui-bg_highlight-hard_100_fc54d9_1x100.png) 50% 50% repeat-x; color: #111111; }
+
+.verdeOscuro { background: #ffe45c url(ui-lightness/images/ui-bg_highlight-soft_75_ffe45c_1x100.png) 50% 50% repeat-x; color: #111111; }
+
+.orange { background: #f8b772 url(ui-lightness/images/images/ui-bg_highlight-hard_100_f8b772_1x100.png) 50% 50% repeat-x; color: #111111; }
+
+.newope{background: #86f862 url(ui-lightness/images/ui-bg_highlight-hard_100_86f862_1x100.png) 50% 50% repeat-x; color: #111111; }
+
+.redFont{color: #cc1e20;font-weight: bold;}
+
+.orangeFont{color: #f8b772;font-weight: bold;}
+
+.blueFont{color: #3366CC;font-weight: bold;}
+
+.greenFont{color: #328230;font-weight: bold;}
+
+.marker_td{ width:7px; font-weight: bold}
+		
+.redFontRef{
+        border-style: solid; 
+		border-width: 1px; 
+		border-color:#000;
+		font-family: verdana, arial, sans-serif; 
+		font-size: 10px; 
+		padding: 0px; 
+		color:#cc1e20; 
+		width:70;
+		height:16;
+		font-weight: bold;}
+		
+.blueFontRef{
+        border-style: solid; 
+		border-width: 1px; 
+		border-color:#000;
+		font-family: verdana, arial, sans-serif; 
+		font-size: 10px; 
+		padding: 0px; 
+		color:#3366CC; 
+		width:70;
+		height:16;
+		font-weight: bold;}
+
+.redBorder{border: 1px solid #cc1e20; background: #e4a0a0 url(ui-lightness/images/ui-bg_highlight-hard_100_e4a0a0_1x100.png) 50% 50% repeat-x; color: #111111; }
+
+.greenBorder {border: 1px solid #186219; background: #86f862 url(ui-lightness/images/ui-bg_highlight-hard_100_86f862_1x100.png) 50% 50% repeat-x; color: #111111; }
+
+.purple{background: #cf9ddd url(ui-lightness/images/ui-bg_highlight-hard_100_cf9ddd_1x100.png) 50% 50% repeat-x; color: #111111; }
+
+.yellow { background: #f7eb64 url(ui-lightness/images/ui-bg_highlight-hard_100_f7eb64_1x100.png) 50% 50% repeat-x; color: #111111; }
+
+.gray{ background: #707070 url(ui-lightness/images/ui-bg_highlight-hard_100_707070_1x100.png) 50% 50% repeat-x; color: #c20400; }
+
+.blue{ border: 1px solid #1b27b6; background: #7c95c0 url(ui-lightness/images/ui-bg_highlight-hard_100_7c95c0_1x100.png) 50% 50% repeat-x; color: #111111; }
+
+.orangeyellow{background: #f6e38e url(ui-lightness/images/ui-bg_highlight-hard_100_f6e38e_1x100.png) 50% 50% repeat-x; color: #111111; }
+
+.yellowgreen {background: #c6f755 url(ui-lightness/images/ui-bg_highlight-hard_100_c6f755_1x100.png) 50% 50% repeat-x; color: #111111; }
+
+.black{background: #000000 url(ui-lightness/images/ui-bg_highlight-hard_75_000000_1x100.png) 50% 50% repeat-x; color: #ffffff; }
+
+.my-ui-state-hover{ border: 1px solid #79b7e7; background: #d0e5f5 url(ui-lightness/images/ui-bg_glass_75_d0e5f5_1x400.png) 50% 50% repeat-x; color: #111111; }
+
+Input.container{ width:15; }
+
+.ExcelButton{ 
+		border: 1px solid #000000; 
+		width:inherit;
+		height:inherit;
+}
+		
+.queryd { 
+		border: 1px solid #000000;
+		position: relative;
+		top: 0px;
+		font-family: verdana, arial, sans-serif; 
+		font-size: 9px; 
+		padding: 0px; 
+		color:black; 
+		width:70;
+		height:14;
+		}
+
+.date .hour {
+text-align:center;
+}
+
+.Tam0{
+		border-style: solid; 
+		text-align: center;
+		border-collapse: collapse;
+		 border: 1px solid #111111;
+		padding: 0 0 0 0 ;
+			}
+			
+.TamX{
+		border-style: solid; 
+		border-collapse: collapse;
+		 border: 1px solid #111111;
+		padding: 0 0 0 0 ;			
+		}
+		
+.Tam1{
+        
+		width:65px;
+		border-style: solid; 
+		text-align: center;
+		border-collapse: collapse;
+		 border: 1px solid #111111;
+		padding: 0 0 0 0 ;
+			}
+			
+.Tam2{
+		width:75px;
+		border-style: solid; 
+		border: 1px solid #111111;
+		padding: 0 0 0 0 ;
+			}
+			
+.TamBooking{
+		width:100px;
+		border-style: solid; 
+		 border: 1px solid #111111;
+		padding: 0 0 0 0 ;
+			}
+			
+.TamFixed{   
+         position: fixed;
+         left: 0%;
+         z-index: 9;
+		 width:79px;
+		 border: 1px solid #1b27b6;
+		 padding: 0 0 0 0 ;
+			}
+			
+.Tam3{
+		width:125px;
+		 border-style: solid; 
+		  border: 1px solid #111111;
+		 padding: 0 0 0 0 ;
+			}
+.Tam4{
+		width:200px;
+		 border-style: solid;
+		  border: 1px solid #111111;
+		 padding: 0 0 0 0 ;
+			}
+.Tam5{
+		 width:100px;
+		 border-style: solid; 
+		 border: 1px solid #111111;
+		 padding: 0 0 0 0 ;
+			}
+ td {
+	 border-width: 0.01em; 
+	 font-family: verdana, arial, sans-serif; 
+	 font-size: 10px; padding: 0px;
+	 position:relative;
+	 border-color: #525252;
+	 padding: 0 0 0 0 ;
+	 }
+			
+#Titulos{
+	text-align:center;
+	border: 1px solid #4297d7;
+    background: #5c9ccc url(ui-lightness/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png) 50% 50% repeat-x; 
+    color: #ffffff; 
+    font-weight: bold;		
+    }
+    
+.CalenderBotton{
+    background: #5c9ccc url(ui-lightness/images/calendario.gif); 
+    height:17;
+    width:21;
+}    
+
+#Salto{
+	width:25px
+	}
+	
+#salto_sub{
+	width:25px
+	}
+	
+#Espera{
+   width: 112px;
+   height: 112px;
+   position: absolute;
+   top: 50%;
+   left: 15%;
+   margin-top: -56px;
+   margin-left: -56px;
+} 
+
+	
+#Espera2{
+	text-align:center;
+	vertical-align:center;
+	
+	}
+	
+.bordeHidden{
+	border-style: solid;
+	border-width: 1px; 
+	border-color: #111111;
+	}
+	
+.bordeSolid{
+	border-style: 	solid;
+	border-width: 1px; 
+	}
+	
+.FormName{
+	text-align:left;
+	font-family: verdana, arial, sans-serif; 
+	font-size: 18px; padding: 0px;
+	}
+	
+.ancho{
+width:inherit;
+}
+
+.tabla {
+    top: 30px;
+	height: 100%;
+	width: 100%;
+	background: #fef1ec url(warp.jpg) 100% 100% repeat-x; color: #cd0a0a; 
+}
+.celda {
+	height: 700px;
+	width:40%;
+}
+
+.txtcenter{
+text-align:center;
+}
+
+
+.NumPageInput{
+		height:12;
+		text-align: inherit;
+}
+
+.text_generic { font-family: verdana, arial, sans-serif; ; font-size: 1.3em; color: #e17009; text-decoration: none;}
+
+.text_menu { text-align:center; font-family: verdana, arial, sans-serif; font-size: 1.5em; color: #e17009; text-decoration: none; font-weight: bold;	 }
+
+.guide_type{ position: relative; width: 65px}
+
+#buscador_individual{ position: fixed; left: 20px; top: 50px; z-index: 9}
+
+.box{
+height:12;
+}
+

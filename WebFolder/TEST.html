@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+
+<p>Today's welcome message is:</p>
+
+<p>{{json}}</p>
+
+</div>
+
+<p>The $http service requests a page on the server, and the response is set as the value of the "myWelcome" variable.</p>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope, $http) {
+  
+  $http.get("/4DACTION/TEST_EXCHANGE")
+  .then(function(response) {
+      $scope.json = response.data;
+  });
+
+  $scope.send = function(){
+    
+    $http({
+    method: "GET",
+    url: "/4DACTION/TEST_SAVE",
+    params: $scope.json
+    })
+    .success(function (response) { 
+    	console.log(response.data)
+        })
+    .error(function (response) { 
+            alert("ERROR");
+        });
+  }
+
+});
+</script>
+
+</body>
+</html>

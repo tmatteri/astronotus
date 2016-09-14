@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta name="generator" content="BBEdit 9.3" />
+	<TITLE>Sistema Translog Web</title>
+	<link type="text/css" href="css/ExcelStyle.css" rel="Stylesheet" />	
+	<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.16.custom.css" rel="Stylesheet" />
+	<link type="text/css" href="css/ui-lightness/jquery.ui.timepicker.css" rel="Stylesheet" />
+	<script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
+	<script type="text/javascript" src="js/sessvars.js"></script>
+	<script type="text/javascript" src="js/CheetaWeb.js"></script>
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+	<script>
+	
+	
+
+	$(document).ready(function(){
+	
+	Logo();
+	
+	$( "#tabs" ).tabs();
+	
+	$(".boton").button();
+	
+	$( "#accordion" ).accordion();
+	
+    CheckCookiesLogin();
+	
+	$("#login_users_botton").click(function () {
+	
+	var user = $("#user_nick").attr('value')
+	
+	var pass = $("#user_pass").attr('value')
+	
+	 $.ajax({
+	
+     				url : "/4DACTION/WEB_Excel_User_Connect/="+user +"*/="+ pass+"*/",
+	  
+      				type : 'GET',
+	  
+	  				dataType: 'html',
+					
+					cache: false,
+	  
+      				success : function(html) {	
+      											 $("#alert").html(html)
+ 												 if(enter == true){
+ 												 redireccionar();
+ 												 }
+ 												 else{
+ 												  $("#alert").dialog({	
+	   												title: 'Alert',
+	   												resizable: false,
+	   												modal: true,
+	   												buttons: {
+	   												
+	   												"ok": function() { 
+	 												$(this).dialog( "close" );
+	  												$(this).dialog( "destroy" );
+	  												$(this).html( "" );}//end OK
+
+	   													}//end BOTTON
+		   
+ 												 	});//END DIALOG
+ 												 
+      										 	}//end else	
+      										 	
+      										 }//END SUCCESS
+	  
+     		 }); // END AJAX  
+	  
+	})//fin click
+
+	
+	})//FIN READY
+	
+function redireccionar(){
+  $.cookie("user", $("#user_nick").attr('value'));
+  
+  if($("#check2").attr('checked')=="checked"){
+    $.cookie("check", "checked");
+    $.cookie("pass", $("#user_pass").attr('value'));
+  }	
+  
+  document.location.href="/menu.html";
+} 
+	</script>
+</head>
+<body>
+<div align="center">
+
+
+<div id='menu_body'></div>
+<div id='EspacioTop'></div>
+<div id='barraTop'><span class='FormName'>Sistema Translog Web</span></div>
+<div id='LogoEmpresa' align="center"></div>
+
+      
+<div id="tabs" align="center">
+<ul>
+<li><a href="#tabs-1">Cliente</a></li>
+<li><a href="#tabs-2">Usuario</a></li>
+</ul>
+<form action="4daction/WEB_Ingreso" method="post" name="form1">
+<div id="tabs-1" width='400px' height='400px'>
+
+	 <span class='FormName bordeHidden ui-dialog-titlebar ui-widget-header ui-helper-clearfix' align='center' >Clientes</span>
+
+     <table border="0">
+<tr>
+<td height='25px' width='60px' align='right'><span class='text_generic'>Usuario </span></td>
+<td height='25px' width='200px'><input name="user" type="text" id="clients_nick" class='queryd'></td>
+</tr>
+<tr>
+<td height='25px' width='60px' align='right'><span class='text_generic'>Clave </span></td>
+<td height='25px' width='200px'><input name="pass" type="password" id="clients_pass" class='queryd'></td>
+</tr>
+<tr>
+<td height='25px' width='100px' colspan='2' align='center'>
+		<select name="Tipo" id="Tipo">
+          <option value="CAE">Exportacion aerea</option>
+          <option value="CAI" selected>Importacion aerea</option>
+          <option value="CME">Exportacion Maritima</option>
+          <option value="CMI">Importacion Maritima</option>
+          <option value="TIE">Exportacion Terrestre</option>
+          <option value="TII">Importacion Terrestre</option>
+          <option value="TTN">Terrestre Nacional</option> 
+        </select></td>
+</tr>
+<tr>
+<td height='25px' width='100px' colspan='2' align='center'><button id='login_clients_botton' type='submit' class='boton' >Login</button></td>
+</tr>
+</table>
+ 
+</div>
+</form>
+<div id="tabs-2" width='400px' height='400px'>
+
+	     <span class='FormName bordeHidden ui-dialog-titlebar ui-widget-header ui-helper-clearfix' align='center' >Usuarios</span>
+
+   <table border="0">
+<tr>
+<td height='25px' width='60px' align='right'><span class='text_generic'>Usuario </span></td>
+<td height='25px' width='200px'><input name="user" type="text" id="user_nick" class='queryd'></td>
+</tr>
+<tr>
+<td height='25px' width='60px' align='right'><span class='text_generic'>Clave </span></td>
+<td height='25px' width='200px'><input name="pass" type="password" id="user_pass" class='queryd'></td>
+</tr>
+<tr>
+<td height='25px' width='100px' colspan='2' align='center'><input id="check2" name="check2" type="checkbox"/>Recordar password</td>
+</tr>
+<tr>
+<td height='25px' width='100px' colspan='2' align='center'><button id='login_users_botton' type='botton' class='boton' >Login</button></td>
+</tr>
+</table>
+
+</div>
+</div> 
+
+
+</div>
+<div id='alert'></div>
+
+
+
+
+
+</body>
+</html>

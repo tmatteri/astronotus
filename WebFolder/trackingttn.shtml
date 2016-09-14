@@ -1,0 +1,251 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title>Web Tracking</title>
+<style type="text/css">
+p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center}
+p.p2 {margin: 0.0px 0.0px 12.0px 0.0px; text-align: center; font: 12.0px Verdana}
+p.p3 {margin: 0.0px 0.0px 12.0px 0.0px; text-align: center; font: 12.0px Helvetica; min-height: 14.0px}
+p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 10.0px Verdana}
+p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+p.p6 {margin: 0.0px 0.0px 10.0px 0.0px; font: 12.0px Verdana; color: #ef801d}
+p.p7 {margin: 0.0px 0.0px 12.0px 0.0px; font: 10.0px Verdana}
+p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Verdana; min-height: 15.0px}
+span.s1 {font: 12.0px Helvetica}
+span.s2 {color: #0024f8}
+table.t1 {width: 598.0px; border-style: solid; border-width: 1.0px 1.0px 1.0px 1.0px; border-color: #808080 #808080 #808080 #808080; padding: 1.0px 0.0px 1.0px 0.0px}
+table.t2 {width: 704.0px; border-style: solid; border-width: 1.0px 1.0px 1.0px 1.0px; border-color: #808080 #808080 #808080 #808080; padding: 1.0px 0.0px 1.0px 0.0px}
+td.td1 {width: 262.0px; margin: 0.5px 0.5px 0.5px 0.5px; border-style: solid; border-width: 1.0px 1.0px 1.0px 1.0px; border-color: #808080 #808080 #808080 #808080; padding: 0.0px 1.0px 0.0px 1.0px}
+td.td2 {width: 322.0px; margin: 0.5px 0.5px 0.5px 0.5px; border-style: solid; border-width: 1.0px 1.0px 1.0px 1.0px; border-color: #808080 #808080 #808080 #808080; padding: 0.0px 1.0px 0.0px 1.0px}
+td.td3 {width: 322.0px; background-color: #cccccc; margin: 0.5px 0.5px 0.5px 0.5px; border-style: solid; border-width: 1.0px 1.0px 1.0px 1.0px; border-color: #808080 #808080 #808080 #808080; padding: 0.0px 1.0px 0.0px 1.0px}
+td.td4 {width: 696.0px; margin: 0.5px 0.5px 0.5px 0.5px; border-style: solid; border-width: 1.0px 1.0px 1.0px 1.0px; border-color: #808080 #808080 #808080 #808080; padding: 0.0px 1.0px 0.0px 1.0px}
+</style>
+<meta name="Generator" content="Cocoa HTML Writer">
+<meta name="CocoaVersion" content="824.38">
+	<script type="text/javascript" src="../js/jquery-1.6.2.min.js"></script>
+	<script type="text/javascript" src="../js/CheetaWeb.js"></script>
+</head>
+<script language=JavaScript>
+function printRPT()
+{
+window.print()
+}
+$(document).ready(function(){
+	
+	Logo();
+	
+	})
+
+</script>
+<body>
+<table width="75%" border="1">
+  <tr>
+    <td><font color="#003366" size="2" face="Verdana, Arial, Helvetica, sans-serif"><div id='LogoEmpresa' align="center"></div></font></td>
+    <td nowrap><form action="../4daction/WEB_Find?<!--4DVAR xWebClient-->" method="post" name="form1">
+        <font size="1"> <font face="Verdana, Arial, Helvetica, sans-serif">
+        <select name="Tipo" id="select2">
+          <option value="CAE">Exportacion aerea</option>
+          <option value="CAI">Importacion aerea</option>
+          <option value="CME">Exportacion maritima</option>
+          <option value="CMI">Importacion maritima</option>
+          <option value="TIE">Exportacion terrestre</option>
+          <option value="TII">Importacion terrestre</option>
+          <option value="TTN" selected>Terrestre nacional</option>
+        </select>
+        <br>
+        <select name="Status" id="select3">
+          <option value="AL" selected>Todos
+          <option value="AE">Esperando Embarque
+          <option value="ET">En Transito
+          <option value="AR">Llegados a Destino
+        </select>
+        <input type="submit" name="Submit" value="Filtrar">
+        </font></font>
+      </form>
+    </td>
+    <td nowrap><form name="form3" method="post" action="../4daction/WEB_FindTTN?<!--4DVAR xWebClient-->">
+        <font size="1"> <font face="Verdana, Arial, Helvetica, sans-serif">
+        <input name="Buscar" type="text" id="Buscar" size="20">
+        <input name="Submit" type="submit" id="Submit" value="Buscar">
+        </font></font>
+      </form>
+    </td>
+  </tr>
+</table>
+<p align="center" class="p5"><font color="#003366" size="1" face="Verdana, Arial, Helvetica, sans-serif"><br>
+  <font size="2"> 
+  <!--4DSCRIPT/WEB_CLIENT-->
+  <em><strong> 
+  <!--4DVAR TCLIENT-->
+  </strong></em></font></font></p>
+<p align="center" class="p8">&nbsp;</p>
+<div align="center"> 
+  <table width="700" border="1" cellpadding="1" cellspacing="1">
+     <tr> 
+      <td><div align="center"><font color="#003366" size="1" face="Verdana, Arial, Helvetica, sans-serif"><em><strong>Codigo</strong></em></font></div></td>
+      <td><div align="center"><font color="#003366" size="1" face="Verdana, Arial, Helvetica, sans-serif"><em><strong>Ref.</strong></em></font></div></td>
+      <td><div align="center"><font color="#003366" size="1" face="Verdana, Arial, Helvetica, sans-serif"><em><strong>Status</strong></em></font></div></td>
+      <td><div align="center"><font color="#003366" size="1" face="Verdana, Arial, Helvetica, sans-serif"><em><strong><em><strong>Cnee</strong></em></strong></em></font></div></td>
+      <td><div align="center"><font color="#003366" size="1" face="Verdana, Arial, Helvetica, sans-serif"><em><strong><em><strong>Origen</strong></em></strong></em></font></div></td>
+      <td><div align="center"><font color="#003366" size="1" face="Verdana, Arial, Helvetica, sans-serif"><em><strong><em><strong>Destino</strong></em></strong></em></font></div></td>
+      <td><div align="center"><font color="#003366" size="1" face="Verdana, Arial, Helvetica, sans-serif"><em><strong><em><strong>Transportadora</strong></em></strong></em></font></div></td>
+      <td><div align="center"><font color="#003366" size="1" face="Verdana, Arial, Helvetica, sans-serif"><em><strong><em><strong>CTRC</strong></em></strong></em></font></div></td>
+      <td><div align="center"><font color="#003366" size="1" face="Verdana, Arial, Helvetica, sans-serif"><em><strong><em><strong>Peso</strong></em></strong></em></font></div></td>
+      <td><div align="center"><font color="#003366" size="1" face="Verdana, Arial, Helvetica, sans-serif"><em><strong><em><strong>Salida</strong></em></strong></em></font></div></td>
+      <td><div align="center"><font color="#003366" size="1" face="Verdana, Arial, Helvetica, sans-serif"><em><strong><em><strong>Llegada</strong></em></strong></em></font></div></td>
+    </tr>
+    <!--4DSCRIPT/WEB_TTN1-->
+    <!--4DLOOP [HOUSE_TTN]-->
+    <!--4DSCRIPT/WEB_TTN_DATOS-->
+    <!--4DIF XCOLOR=1-->
+    <tr bgcolor="#CCCCCC"> 
+      <!--4DELSE-->
+    <tr bgcolor="#FFFFFF"> 
+      <!--4DENDIF-->
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <a href=Web_Detail?<!--4DVAR TWEBID-->>
+          <!--4DVAR [HOUSE_TTN]ID-->
+          </a> </font></div></td>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DVAR [HOUSE_TTN]CLIENT_REFERENCE-->
+          </font></div></td>
+      <font color="#003366"></td></font>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DVAR TWSTATUS-->
+          </font></div></td>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DVAR TWCONSIGNATARY-->
+          </font></div></td>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DVAR TWORIGIN-->
+          </font></div></td>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DVAR TWDESTINATION-->
+          </font></div></td>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DVAR TWAIRLINE-->
+          </font></div></td>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DHTMLVAR [HOUSE_TTN]DOC_Number-->
+          </font></div></td>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DVAR [HOUSE_TTN]TOTAL_WEIGHT-->
+          </font></div>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DVAR [HOUSE_TTN]DATE_ETD-->
+          </font></div>
+        <font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+        </font></td>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DVAR [HOUSE_TTN]DATE_ETA-->
+          </font></div>
+        <font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+        </font></td>
+    </tr>
+    <!--4DENDLOOP-->
+    <!--4DSCRIPT/WEB_TTN2-->
+    <!--4DLOOP [HOUSE_TTN]-->
+    <!--4DSCRIPT/WEB_TTN_DATOS-->
+    <!--4DIF XCOLOR=1-->
+   <tr bgcolor="#CCCCCC"> 
+      <!--4DELSE-->
+    <tr bgcolor="#FFFFFF"> 
+      <!--4DENDIF-->
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <a href=Web_Detail?<!--4DVAR TWEBID-->>
+          <!--4DVAR [HOUSE_TTN]ID-->
+          </a> </font></div></td>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DVAR [HOUSE_TTN]CLIENT_REFERENCE-->
+          </font></div></td>
+      <font color="#003366"></td></font>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DVAR TWSTATUS-->
+          </font></div></td>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DVAR TWCONSIGNATARY-->
+          </font></div></td>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DVAR TWORIGIN-->
+          </font></div></td>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DVAR TWDESTINATION-->
+          </font></div></td>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DVAR TWAIRLINE-->
+          </font></div></td>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DHTMLVAR [HOUSE_TTN]DOC_Number-->
+          </font></div></td>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DVAR [HOUSE_TTN]TOTAL_WEIGHT-->
+          </font></div>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DVAR [HOUSE_TTN]DATE_ETD-->
+          </font></div>
+        <font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+        </font></td>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DVAR [HOUSE_TTN]DATE_ETA-->
+          </font></div>
+        <font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+        </font></td>
+    </tr>
+    <!--4DENDLOOP-->
+    <!--4DSCRIPT/WEB_TTN3-->
+    <!--4DLOOP [HOUSE_TTN]-->
+    <!--4DSCRIPT/WEB_TTN_DATOS-->
+    <!--4DIF XCOLOR=1-->
+   <tr bgcolor="#CCCCCC"> 
+      <!--4DELSE-->
+    <tr bgcolor="#FFFFFF"> 
+      <!--4DENDIF-->
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <a href=Web_Detail?<!--4DVAR TWEBID-->>
+          <!--4DVAR [HOUSE_TTN]ID-->
+          </a> </font></div></td>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DVAR [HOUSE_TTN]CLIENT_REFERENCE-->
+          </font></div></td>
+      <font color="#003366"></td></font>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DVAR TWSTATUS-->
+          </font></div></td>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DVAR TWCONSIGNATARY-->
+          </font></div></td>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DVAR TWORIGIN-->
+          </font></div></td>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DVAR TWDESTINATION-->
+          </font></div></td>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DVAR TWAIRLINE-->
+          </font></div></td>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DHTMLVAR [HOUSE_TTN]DOC_Number-->
+          </font></div></td>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DVAR [HOUSE_TTN]TOTAL_WEIGHT-->
+          </font></div>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DVAR [HOUSE_TTN]Date_ETD-->
+          </font></div>
+        <font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+        </font></td>
+      <td nowrap><div align="center"><font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+          <!--4DVAR [HOUSE_TTN]Date_ETA-->
+          </font></div>
+        <font color="#003366" size="-2" face="Verdana, Arial, Helvetica, sans-serif"> 
+        </font></td>
+    </tr>
+    <!--4DENDLOOP-->
+  </table>
+  <p align="right"><font face="Verdana, Arial, Helvetica, sans-serif"><img src="../powered.gif"></font></p>
+</div>
+<A onclick=javascript:printRPT() href="#" onfocus="blur()">Imprimir el contenido</a>
+</body>
+</html>

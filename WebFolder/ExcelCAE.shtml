@@ -1,0 +1,832 @@
+<HTML>
+<HEAD>
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+     <META HTTP-EQUIV="Cache-Control" CONTENT ="no-cache">
+     <meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
+     <meta HTTP-EQUIV="Expires" CONTENT="-1">
+	<TITLE> Cheeta Web Excel Style</title>
+<link type="text/css" href="../css/ExcelStyle.css" rel="Stylesheet" />	
+<link type="text/css" href="../css/ui-lightness/jquery-ui-1.8.16.custom.css" rel="Stylesheet" />
+<link type="text/css" href="../css/ui-lightness/jquery.ui.timepicker.css" rel="Stylesheet" />
+<script type="text/javascript" src="../js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="../js/jquery-ui-1.8.16.custom.min.js"></script>
+<script type="text/javascript" src="../js/jquery.ui.timepicker.js"></script>
+<script type="text/javascript" src="../js/CheetaWeb.js"></script>
+<script type="text/javascript" src="../js/sessvars.js"></script>
+<script type="text/javascript" src="../js/jquery.cookie.js"></script>
+<script>
+
+
+//CONTASTES
+var Ope_Type="1"; //CAE
+var CantRegXHoja = 40;
+//FIN CONTASTES
+
+var Query= "";
+var isSelec = false;
+var Cme_CurrentRow;
+var CurrentCellSub;
+var CurrentRowSub;
+var Original_Value;
+
+ConfirmETAETD(false);
+
+var LastOrderParam="";
+
+var AntOPE_ID="";
+ $("input").live("click", function(event){
+     
+     ModCell = $(this)
+     CurrentRow = $(this).parent().parent();
+	 var Ope_ID = CurrentRow.find('.cae_id').val();
+	
+	if(Ope_ID != AntOPE_ID){
+	 $.ajax({
+	
+     				url : "/4DACTION/Web_Excel_VerificaOpeAbierta/="+Ope_ID +"*/",
+	  
+      				type : 'GET',
+	  
+	  				dataType: 'html',
+					
+					cache: false,
+	  
+      				success : function(html) {
+      										
+      										if(html=="TRUE"){GenericAlert("La operacion " +Ope_ID+ " esta siendo modifcada en el sistema, los cambios realizados en web booking no seran validos a menos de que esta se cierre primero" );}
+      										
+      										 }//END SUCCESS
+	  
+     		 }); // END AJAX  
+ }
+ AntOPE_ID = Ope_ID;
+ }) //FIN LIVE
+ 
+OrderBY();
+
+SelectColor();
+RowDoubleClick();
+beforeSave();
+
+BuscadorIndividual('.selec','.ETDdate','#ETDSearch');
+
+BuscadorIndividual('.selec','.ETAdate','#ETASearch');
+
+BuscadorIndividual('.selecActual','.client','#clientSearch');
+
+BuscadorIndividual('.selec','.origin','#PolSearch');
+
+BuscadorIndividual('.selec','.destination','#PodSearch');
+
+BuscadorIndividual('.selec','.airline','#airlineSearch');
+
+BuscadorIndividual('.selec','.agent','#agentSearch');
+
+BuscadorIndividual('.selec','.seller','#seller1Search');
+
+BuscadorIndividual('.selec','.seller2','#seller2Search');
+
+BuscadorIndividual('.selec','.checkdate','#CheckDateSearch');
+
+ //GUIAS
+ $(".guide_type").live("click", function(event){
+
+  GuideClick($(this)); 
+
+ }); //FIN CLICK GUIAS
+ 
+
+$(".anular_cae").live("click", function(event){
+
+anularOperacion($(this),'.cae_id')
+
+ }); //FIN LIVE
+
+function login(){
+
+$("#login_users_botton").button();
+
+MyExcelLoginAlert();
+
+}//FIN LOGIN
+
+$('tr.selec > td > input').live("change", function(event){
+    
+    ModifyCell();
+
+    MyExcelLogin();
+    
+ }); //FIN LIVE
+ 
+ 
+ $('tr.selec > td > input').live("keypress", function(event){
+    
+  /*if ( event.keyCode == 39 ) {
+  
+  	var asa = $(CurrentCell).parent().next().children().focus();
+
+   }*/
+    
+ }); //FIN LIVE
+
+
+$(".add_cae").live("click", function(event){
+    
+	addOperation('CAE');
+	/*$.ajax({
+	
+     				url : "/4DACTION/WEB_Excel_CAE_AddRecord",
+	  
+      				type : 'GET',
+	  
+	  				dataType: 'html',
+					
+					cache: false,
+	  
+      				success : function(html) {
+      											addFila(html,".new_cae");
+         				 						//$(".new_cae").replaceWith(html);
+      										 }
+	  
+     		 }); // END AJAX  */
+	   
+
+ }); //FIN LIVE
+ 
+ $("#salir").live("click", function(event){
+    
+	 $.ajax({
+	
+     				url : "/4DACTION/Web_Excel_DesLogin/="+sessvars.User.name+"*/",
+	  
+      				type : 'GET',
+	  
+	  				dataType: 'html',
+					
+					cache: false,
+	  
+      				success : function(html) {
+      											sessvars.User.name=""
+  												document.location.href="/in.shtml";
+      										 }
+	  
+     		 }); // END AJAX  
+	   
+
+ }); //FIN LIVE
+
+
+ function AddContainer(cme_id){
+ 
+  $.ajax({
+	
+     				url : "/4DACTION/WEB_Excel_CME_Add_Containers/="+cme_id+"*/",
+	  
+      				type : 'GET',
+	  
+	  				dataType: 'html',
+					
+					cache: false,
+	  
+      				success : function(html) {
+         				 						$(".new_cme_ctr").replaceWith(html);
+         				 						$(".cme_container").change(function(){
+												saveShadowContainer($(this))
+												})
+												$("tr.SelecSub").find("Input").focus(function(){
+												CurrentCellSub=$(this);
+												});
+      										 }
+	  
+     		 }); // END AJAX  
+ 
+ }
+ 
+ function DelContainer(shadow_id){
+ 
+  $.ajax({
+	
+     				url : "/4DACTION/WEB_Excel_CME_Del_Containers/="+shadow_id+"*/",
+	  
+      				type : 'GET',
+	  
+	  				dataType: 'html',
+					
+					cache: false,
+	  
+      				success : function(html) {
+      					                    var c20 = parseInt(CurrentRow.find(".teu20").attr('value'))
+         				 					var c40 = parseInt(CurrentRow.find(".feu40").attr('value'))
+         				 					
+         				 					var x = parseInt(html)
+         				 	                switch (x) {
+         				 	                	case 40:
+         				 	                		c40--
+         				 	                	break;	    
+         				 	                	case 20:
+         				 	                		c20--
+         				 	                		break;
+         				 	                }	
+         				 					
+         				 					CurrentRow.find(".teu20").attr('value',c20)
+         				 					CurrentRow.find(".feu40").attr('value',c40) 
+         				 						CurrentRowSub.replaceWith("");
+         				 						$(".cme_container").change(function(){
+												saveShadowContainer($(this))
+												})
+												$("tr.SelecSub").find("Input").focus(function(){
+												CurrentCellSub=$(this);
+												});
+      										 }
+	  
+     		 }); // END AJAX  
+ 
+ }
+	
+$("tr.selec > td > input").live("focus", function(event){
+     
+ 	MouseEnter(this);
+
+ }); //FIN LIVE
+
+ 
+ $("tr.selec > td > input").live("focusout", function(event){
+ 	MouseLeave(this);
+ 
+ }) //FIN LIVE
+  
+ $("input.date").live("focus", function(event){
+ 
+	focusDate(this);
+ 
+ }) //FIN LIVE
+ 
+  $("input.hour").live("focus", function(event){
+ 
+	focusHour(this);
+ 
+ }) //FIN LIVE
+ 
+$('input.broker_contact').live('change', function(event) {
+    
+     Query=$(this).attr("value");//ancho alto
+	 ModCell = $(this)
+	 ModCell_ID= CurrentRow.find('.broker_contact_id')
+	 var param = CurrentRow.find('.broker_id').val();
+	 if(Query!=""){
+	 CreateDilog('Contactos','/4DACTION/WEB_Excel_Help_Contacts',440,"="+param+"*/");}
+	  else{
+	 ModCell_ID.attr('value','');
+	 ModCell_ID.attr('name', ModCell_ID.attr('name')+'mod');
+	 }
+
+  	})//fin live
+ 
+ $('input.Air_1').live('change', function(event) {
+ 
+    Query=$(this).attr("value");
+    ModCell = $(this)
+	ModCell_ID= CurrentRow.find('.Air_1')
+    if(Query!=""){
+	  CreateDilog('Aerolineas','/4DACTION/Web_Excel_Help_Airlines',400)
+	  }
+	    else{
+	 ModCell_ID.attr('value','');
+	 ModCell_ID.attr('name', ModCell_ID.attr('name')+'mod');
+	 }
+ 	
+ })//fin live
+ 
+  $('input.Air_2').live('change', function(event) {
+ 
+    Query=$(this).attr("value");
+    ModCell = $(this)
+	ModCell_ID= CurrentRow.find('.Air_2')
+    if(Query!=""){
+	  CreateDilog('Aerolineas','/4DACTION/Web_Excel_Help_Airlines',400)
+	  }
+	    else{
+	 ModCell_ID.attr('value','');
+	 ModCell_ID.attr('name', ModCell_ID.attr('name')+'mod');
+	 }
+ 	
+ })//fin live
+ 
+  $('input.shipper').live('change', function(event) {
+    
+      Query=$(this).attr("value");//ancho alto
+	  ModCell = $(this)
+	  ModCell_ID= CurrentRow.find('.shipper_id')
+	  if(Query!=""){
+	  CreateDilog('Cuenta','/4DACTION/WEB_Excel_Help_Clients',500,"");}
+	  	 else{
+	 ModCell_ID.attr('value','');
+	 ModCell_ID.attr('name', ModCell_ID.attr('name')+'mod');
+	 }
+    
+    });
+ 
+  
+  $('input.port_trans').live('change', function(event) {
+    
+     Query=$(this).attr("value");//ancho alto
+	 ModCell = $(this)
+	 ModCell_ID= CurrentRow.find('.port_trans_id')
+	 ModCell_Extra= CurrentRow.find('.port_trans_country_id')
+	 if(Query!=""){
+	 CreateDilog('Puerto de trasbordo','/4DACTION/WEB_Excel_Help_Ports',400,"");}
+	   else{
+	 ModCell_ID.attr('value','');
+	 ModCell_ID.attr('name', ModCell_ID.attr('name')+'mod');
+	  ModCell_Extra.attr('value','');
+	 }
+
+  })//fin live
+  
+    
+     $('input.seller').live('change', function(event) {
+    
+      Query=$(this).attr("value");//ancho alto
+	  ModCell = $(this)
+	  ModCell_ID= CurrentRow.find('.seller_id')
+	  if(Query!=""){
+	  CreateDilog('Vendedor','/4DACTION/WEB_Excel_Help_Sellers',240,"");}
+	    else{
+	 ModCell_ID.attr('value','');
+	 ModCell_ID.attr('name', ModCell_ID.attr('name')+'mod');
+	 }
+    
+    });
+    
+    HelpSeller2Live();
+    
+    
+    $('input.client').live('change', function(event) {
+    
+      Query=$(this).attr("value");//ancho alto
+	  ModCell = $(this)
+	  ModCell_ID= CurrentRow.find('.client_id')
+	  
+	  if(Query!=""){
+	  CreateDilog('Cuenta','/4DACTION/WEB_Excel_Help_Clients',500,"");}
+	    else{
+	 ModCell_ID.attr('value','');
+	 ModCell_ID.attr('name', ModCell_ID.attr('name')+'mod');
+	 }
+    
+    });
+    
+    $('input.origin').live('change', function(event) {
+    
+     Query=$(this).attr("value");//ancho alto
+	 ModCell = $(this)
+	 ModCell_ID= CurrentRow.find('.origin_id')
+	 ModCell_Extra= CurrentRow.find('.origin_country_id')
+	 if(Query!=""){
+	 CreateDilog('Puerto de Origen','/4DACTION/WEB_Excel_Help_Ports',400,"=A*/");}
+	   else{
+	 ModCell_ID.attr('value','');
+	 ModCell_ID.attr('name', ModCell_ID.attr('name')+'mod');
+	  ModCell_Extra.attr('value','');
+	 }
+
+  	})//fin live
+  	
+  	$('input.destination').live('change', function(event) {
+    
+     Query=$(this).attr("value");//ancho alto
+	 ModCell = $(this)
+	 ModCell_ID= CurrentRow.find('.destination_id')
+	 ModCell_Extra= CurrentRow.find('.destination_country_id')
+	 if(Query!=""){
+	 CreateDilog('Puerto de Destino','/4DACTION/WEB_Excel_Help_Ports',400,"=A*/");}
+	   else{
+	 ModCell_ID.attr('value','');
+	 ModCell_ID.attr('name', ModCell_ID.attr('name')+'mod');
+	  ModCell_Extra.attr('value','');
+	 }
+
+  	})//fin live
+  	
+  	$('input.owner').live('change', function(event) {
+    
+     Query=$(this).attr("value");//ancho alto
+	 ModCell = $(this)
+	 ModCell_ID= CurrentRow.find('.owner_id')
+	 if(Query!=""){
+	 CreateDilog('Armador','/4DACTION/WEB_Excel_Help_Owners',300,"");}
+	   else{
+	 ModCell_ID.attr('value','');
+	 ModCell_ID.attr('name', ModCell_ID.attr('name')+'mod');
+	 }
+
+  	})//fin live
+    
+    
+    $('input.airline').live('change', function(event) {
+    
+     Query=$(this).attr("value");//ancho alto
+	 ModCell = $(this)
+	 ModCell_ID= CurrentRow.find('.airline_id')
+	 if(Query!=""){
+	 CreateDilog('Aerolinea','/4DACTION/WEB_Excel_Help_Airlines_Simple',400,"");}
+	   else{
+	 ModCell_ID.attr('value','');
+	 ModCell_ID.attr('name', ModCell_ID.attr('name')+'mod');
+	 }
+
+  	})//fin live
+  	
+  	$('input.broker').live('change', function(event) {
+    
+      Query=$(this).attr("value");//ancho alto
+	  ModCell = $(this)
+	  ModCell_ID= CurrentRow.find('.broker_id')
+	  if(Query!=""){
+	  CreateDilog('Broker','/4DACTION/WEB_Excel_Help_Brokers',500,"");}
+	  	 else{
+	 ModCell_ID.attr('value','');
+	 ModCell_ID.attr('name', ModCell_ID.attr('name')+'mod');
+	 }
+    
+    })//FIN LIVE
+  	
+  	$('input.agent').live('change', function(event) {
+    
+     Query=$(this).attr("value");//ancho alto
+	 ModCell = $(this)
+	 ModCell_ID= CurrentRow.find('.agent_id')
+	 var param = CurrentRow.find('.destination_id').val();
+	 if(Query!=""){
+	 CreateDilog('Agente','/4DACTION/WEB_Excel_Help_Agents',300,"="+param+"*/");}
+	   else{
+	 ModCell_ID.attr('value','');
+	 ModCell_ID.attr('name', ModCell_ID.attr('name')+'mod');
+	 }
+
+  	})//fin live
+  	
+  	
+  	$('input.client_contact').live('change', function(event) {
+    
+     Query=$(this).attr("value");//ancho alto
+	 ModCell = $(this)
+	 ModCell_ID= CurrentRow.find('.client_contact_id')
+	 var param = CurrentRow.find('.client_id').val();
+	 if(Query!=""){
+	 CreateDilog('Contactos','/4DACTION/WEB_Excel_Help_Contacts',440,"="+param+"*/");}
+	   else{
+	 ModCell_ID.attr('value','');
+	 ModCell_ID.attr('name', ModCell_ID.attr('name')+'mod');
+	 }
+
+  	})//fin live
+  	
+  	$('input.operator').live('change', function(event) {
+    
+     Query=$(this).attr("value");//ancho alto
+	 ModCell = $(this)
+	 ModCell_ID= CurrentRow.find('.operator_id')
+	 if(Query!=""){
+	 CreateDilog('Containers','/4DACTION/Web_Excel_Help_Operators',300,"");}
+	   else{
+	 ModCell_ID.attr('value','');
+	 ModCell_ID.attr('name', ModCell_ID.attr('name')+'mod');
+	 }
+
+  	})//fin live
+  	
+    
+    $('tr.selec > td > input').live('focus',function(){
+    
+		InputFocus($(this));
+		
+    })
+    
+function ReQUERY() {
+
+      var Desde = ":"+$("#desdeETD").attr('value') + "?";
+	  var Hasta = ":"+$("#hastaETD").attr('value') + "?";
+	  if($("#SinDates").attr('checked')=="checked"){ var SinDate = ":TRUE?"; }
+	  else{ var SinDate = ":FALSE?"; }
+	  var DParam =  Desde + Hasta + SinDate
+     
+      $.ajax({
+	
+      url : '/4DACTION/WEB_Excel_CAE_Thead/='+sessvars.User.id+'*/='+DParam+'*/='+LastOrderParam+'*/',
+	  
+      type : 'GET',
+	  
+	  //dataType: 'html',
+	  
+	  cache: false,
+	  
+	  beforeSend: function(){ 
+	  $("#CAE").html("");
+	  $("#Espera").html("<img src='img/EsperaG.gif'> ")
+	  ;},
+	  
+      success : function(html) {
+         $("#CAE").html(html);
+		 onAjax();
+		 nextPage(1);
+      },
+	  
+      error : function(xhr, status) {
+          alert('Disculpe, existió un problema' + xhr + status) ;
+	  },
+     }); // END AJAX
+     }//END ReQUERY
+
+    
+
+function onAjax(){
+	
+	var currentPage = $('#salto').attr('value');
+	  
+	Buscador('.selec','.query');
+	
+	TiposDeGuia();
+	
+	ResizableTDS('#RezC21','.descon_depot',125);
+	ResizableTDS('#RezC19','.agent',75);
+	ResizableTDS('#RezC18','.airline',75);
+	ResizableTDS('#RezC17','.owner',75);
+	ResizableTDS('#RezC16','.destination',75);
+	ResizableTDS('#RezC15','.origin',75);
+	ResizableTDS('#RezC14','.client',75);
+	ResizableTDS('#RezC13','.buy_order',75);
+	ResizableTDS('#RezC12','.vessels_trans',75);
+	ResizableTDS('#RezC11','.port_trans',75);
+	ResizableTDS('#RezC10','.consolida',75);
+	ResizableTDS('#RezC1','.cme_id',75);
+	ResizableTDS('#RezC2','.cme_folder',75);
+	ResizableTDS('#RezC4','.vessel',125);
+	ResizableTDS('#RezC8','.depot', 125);
+	  		
+	RezideObs('#cae');
+		
+    $("#sig").click(function(){
+    
+      var x = $('#salto').attr('value');
+      
+      var x2 = parseInt(x) + 1;
+      
+      var max = parseInt($('#cantPag').html());
+      
+      if(x2<=max){
+      
+      var str = '.page'+ x ;
+      
+      var str2 = '.page' + x2;
+      
+      $("tr"+ str).hide();
+      $("tr"+ str2).show();
+      
+       $('#salto').attr('value',x2);
+       currentPage = $('#salto').attr('value');}
+    
+    })
+    
+    
+       $("#ante").click(function(){
+    
+      var x = $('#salto').attr('value')
+      
+      var x2 = parseInt(x) - 1
+      
+      if(x2>=1){
+      
+      var str = '.page'+ x 
+      
+      var str2 = '.page' + x2
+      
+      $("tr"+ str).hide();
+      $("tr"+ str2).show();
+      
+      $('#salto').attr('value',x2)
+      currentPage = $('#salto').attr('value')
+      }
+    
+    })
+    
+    $("#salto").change(function(){
+    
+      var x2 = $('#salto').attr('value')
+      
+      var max = parseInt($('#cantPag').html())
+      
+      if((x2>=1) && (x2<=max)){
+      
+      var str = '.page'+ currentPage
+      
+      var str2 = '.page' + x2
+      
+      $("tr"+ str).hide();
+      $("tr"+ str2).show();
+      
+      currentPage = $('#salto').attr('value')
+      }//fin if
+    
+    })
+    
+     $(".queryd").datepicker({ 
+ 	dateFormat: 'dd/mm/yy',
+ 	onClose: function(){
+			},
+		onSelect: function(){
+			}
+			
+		});
+	
+	
+	$("#save").button({
+	icons: {
+	primary: "ui-icon-disk"
+		}
+	}); 
+	
+	$("#ReQuery").button({
+	text: false,
+	icons: {
+	primary: "ui-icon-search"
+		}
+	}); 
+	
+	$("#Anular").button({
+	icons: {
+	primary: "ui-icon-close"
+		}
+	}); 
+	
+	$("#Add").button({
+	icons: {
+	primary: "ui-icon-plus"
+		}
+	}); 
+	
+	
+	$( "#ante" ).button({
+	text: false,
+	icons: {
+	primary: "ui-icon-seek-prev"
+		}
+	}); 
+	
+	$( "#sig" ).button({
+	text: false,
+	icons: {
+	primary: "ui-icon-seek-next"
+		}
+	}); 
+
+
+	$( "#cancel" ).button({
+	icons: {
+	primary: "ui-icon-refresh"
+		}
+	}); 
+	
+	$(".search").button({
+	text: false,
+	icons: {
+	primary: "ui-icon-search"
+		}
+	}); 
+	
+	$( ".DateSearch" ).button({
+	text: false,
+	icons: {
+	primary: "ui-icon-refresh"
+		}
+	}); 
+
+    MyFilter();
+
+	$(".refresh").click(function(){
+     
+    ReQUERY();
+     
+    })
+    
+    $("#Espera").html("");   
+    $("#Espera2").html("");   
+    
+     $('#Usuario').html("Usuario: "+sessvars.User.name);
+    
+	}//END ON AJAX
+
+
+function nextPage(page){
+
+var x = $('#seguir').attr('value')
+
+	  var Desde = ":"+$("#desdeETD").attr('value') + "?";
+	  var Hasta = ":"+$("#hastaETD").attr('value') + "?";
+	  if($("#SinDates").attr('checked')=="checked"){ var SinDate = ":TRUE?"; }
+	  else{ var SinDate = ":FALSE?"; }
+	  var DParam =  Desde + Hasta + SinDate
+	  
+if(x == 'true' ){
+$.ajax({
+	
+      url : '/4DACTION/WEB_Excel_CAE_TBody/='+sessvars.User.id+'*/='+ CantRegXHoja +'*/='+ page +'*/='+DParam+'*/='+LastOrderParam+'*/',
+	  
+      type : 'GET',
+	  
+	  dataType: 'html',
+	  
+	  cache: false,
+	  
+      success : function(html) {
+         $("#next").replaceWith(html);
+         RezideObs('#cae');
+         TiposDeGuia();
+		 nextPage(page+1);
+      },
+	  
+      error : function(xhr, status) {
+          alert('Disculpe, existió un problema' + xhr + status) ;
+	  },
+}); // END AJAX
+}//end if	
+
+}	//END NEXTPAGE
+
+
+	
+$(document).ready(function() {
+
+CheckSession();
+	 
+	  $.ajax({
+	
+      url : '/4DACTION/WEB_Excel_CAE_Thead/='+sessvars.User.id+'*/=*/',
+	  
+      type : 'GET',
+	  
+	  cache: false,
+	  
+	  beforeSend: function(){ $("#Espera").html("<img src='../img/EsperaG.gif'>");},
+	  
+      success : function(html) {
+         $("#CAE").html(html);
+		 onAjax();
+		 nextPage(1);
+      },
+	  
+      error : function(xhr, status) {
+          alert('Disculpe, existió un problema' + xhr + status) ;
+	  },
+     }); // END AJAX
+
+	 
+	});
+	
+function closeExcel(){
+
+}
+
+$('#cancel').live('click',function () {
+    $('body').html('');
+	document.location.href="../ExcelCAE.shtml";
+})
+
+</script>
+</HEAD>
+<BODY leftmargin="0" topmargin="0">
+<form method='post' id='Form' action='../4DACTION/WEB_Excel_CAE_Save'>
+<div id="Espera"></div>
+<div id="Espera2"></div>
+<div id="CAE" class="ui-widget"></div>
+<div id="help" align="center"></div>
+<div id="help2" align="center"></div>
+<div id="alert" align="center"></div>
+</form>
+
+<div id="buscador_individual"><input id="input_buscador_individual"></div>
+
+<div><input type='hidden' id='saved' value='true'></div>
+<div id='Asignar'></div>
+
+<Div id='FiltrosH'>
+<input type='checkbox' checked="yes" class='ClassBox' id='Box1' value='newope'/> <span class="newope">Operacion nueva</span><br/>
+<input type='checkbox' checked="yes" class='ClassBox' id='Box2' value='red'/> <span class="red">Operacion anulada</span><br/>
+<input type='checkbox' checked="yes" class='ClassBox' id='Box3' value='orange'/> <span class="orange">Fecha de arribo confirmada</span><br/>
+<input type='checkbox' checked="yes" class='ClassBox' id='Box4' value='turquesa'/> <span class="turquesa">Fecha de salida confirmada</span><br/>
+<input type='checkbox' checked="yes" class='ClassBox' id='Box5' value='fuxia'/> <span class="fuxia">Transbordo</span><br/>
+<input type='checkbox' checked="yes" class='ClassBox' id='Box6' value='redFont'/> <span class="redFont">No tiene cargos asociados</span><br/>
+<input type='checkbox' checked="yes" class='ClassBox' id='Box7' value='blueFont'/> <span class="blueFont">Dato relacionado a una master</span><br/>
+<input type='checkbox' checked="yes" class='ClassBox' id='Box8' value='NoColor'/> <span class="NoColor">Sin referencias</span><br/>
+</div>
+
+
+</BODY>
+</HTML>
+
+<script> 
+$("#input_buscador_individual").hide();
+$("#FiltrosH").hide();
+</script>
+

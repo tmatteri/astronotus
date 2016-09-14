@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head>
+	<title>Menu</title>
+	<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8">
+	<link rel="stylesheet" type="text/css" media="screen" href="css/all-examples.css">
+	<link type="text/css" href="css/ExcelStyle.css" rel="Stylesheet" />	
+	<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.16.custom.css" rel="Stylesheet" />
+	<noscript>
+		<style type="text/css">
+			#dock { top: 0; left: 100px; }
+			a.dock-item { position: relative; float: left; margin-right: 10px; }
+			.dock-item span { display: block; }
+			.stack { top: 0; }
+			.stack ul li { position: relative; }
+		</style>
+	</noscript>
+	<script type="text/javascript" src="../js/jquery-1.6.2.min.js"></script>
+	<script type="text/javascript" src="../js/jquery-ui-1.8.16.custom.min.js"></script>
+	<script type="text/javascript" src="../Js/jquery.ui.timepicker.js"></script>
+	<script type="text/javascript" src="../js/fisheye-iutil.min.js"></script>
+	<script type="text/javascript" src="../js/dock-example1.js"></script>
+	<script type="text/javascript" src="../js/jquery.jqDock.min.js"></script>
+	<script type="text/javascript" src="../js/sessvars.js"></script>
+	<script type="text/javascript" src="../js/CheetaWeb.js"></script>
+	<script type="text/javascript">
+	
+		$(function(){
+			var jqDockOpts = {align: 'left', duration: 200, labels: 'tc', size: 48, distance: 85};
+			$('#jqDock').jqDock(jqDockOpts);
+		});
+		
+		
+		$(document).ready(function(){
+		
+		Logo();
+		
+		$("#user").html(sessvars.User.name)
+		
+		})
+		
+		 $("#salirmenu").live("click", function(event){
+    
+	 		$.ajax({
+	
+     				url : "/4DACTION/Web_Excel_DesLogin/="+sessvars.User.name+"*/",
+	  
+      				type : 'GET',
+	  
+	  				dataType: 'html',
+					
+					cache: false,
+	  
+      				success : function(html) {
+      											sessvars.User.name=""
+  												document.location.href="/in.shtml";
+      										 }
+	  
+     		 }); // END AJAX  
+	   
+
+			 }); //FIN LIVE
+			 
+			 
+
+			
+//function goAway() { return true; }  onBeforeUnload="return goAway();"
+		
+	</script>
+</head>
+<body>
+	<table class="tabla"	border="0">
+    <tr>
+      <td colspan="3">
+     		 <div class='ui-widget-header' align='center'>
+			 <span class='FormName'>Sistema Translog Web</span>
+			 </div>
+      </td>
+    </tr>
+    <tr class="fila">
+     <td class="celda">
+		<div id='LogoEmpresa' align="center"></div>
+      </td>
+      <td colspan="2">
+     			<!-- BEGIN DOCK 1 ============================================================ -->
+	<div id="dock">
+		<div class="dock-container">
+		<a class="dock-item noAlert" href="in.shtml"><span class='text_menu'>Home</span><img src="img/home2.png" alt="contact" /></a> 
+			<a class="dock-item noAlert" href="IMPO.html"><span class='text_menu'>IMPO</span><img src="img/home.png" alt="home" /></a> 
+			<a class="dock-item noAlert" href="EXPO.html"><span class='text_menu'>EXPO</span><img src="img/email.png" alt="contact" /></a> 
+			<a id="salirmenu" class="dock-item noAlert"><span class='text_menu'>Salir</span><img src="img/salir.png" alt="contact" /></a> 
+		</div><!-- end div .dock-container -->
+	</div><!-- end div .dock #dock -->
+	<!-- END DOCK 1 ============================================================ -->
+     		
+      </td>
+    </tr>
+    
+     <tr>
+      <td>      
+      <div align="center">
+      </div></td>
+       <td>      
+      <div align="center"><img src="powered.gif">
+      </div></td>
+      <td width='33%'>      
+      <div align="center"><span id='user' class='text_menu'></span>
+      </div></td>
+    </tr>
+    
+    
+    </table>
+
+	
+</body>
+</html>

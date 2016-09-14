@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+
+<p>Today's welcome message is:</p>
+
+<p>{{myData}}</p>
+
+<ul>
+  <li ng-repeat="x in myData.HOUSE_CME">
+    <span>Id :</span><input ng-model="x.ID">
+    <span>Final_Destination :</span><input ng-model="x.Final_Destination">
+    <span>Cliente :</span><input ng-model="x.CLIENTS_FK.ID"><input ng-model="x.CLIENTS_FK.Name">
+  </li>
+</ul>
+
+<button ng-click="send()">ENVIAR</button>
+
+</div>
+
+<p>The $http service requests a page on the server, and the response is set as the value of the "myWelcome" variable.</p>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope, $http) {
+  
+  $http.get("/4DACTION/TEST_CME")
+  .then(function(response) {
+      $scope.myData = response.data;
+  });
+
+  $scope.send = function(){
+    
+    $http({
+    method: "GET",
+    url: "/4DACTION/TEST_SAVE",
+    params: $scope.myData
+    })
+    .success(function (response) { 
+    	console.log(response.data)
+        })
+    .error(function (response) { 
+            alert("ERROR");
+        });
+  }
+
+});
+</script>
+
+</body>
+</html>

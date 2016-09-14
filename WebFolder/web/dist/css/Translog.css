@@ -1,0 +1,19 @@
+
+
+.Background-translog {
+    background-image: url("../dist/Images/Translog_Background.jpg");
+    background-color: #cccccc;
+}
+.Background-sidebar {
+   
+    background: rgba(255, 255, 255, 0.3);
+}
+.nav > li > a {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  background-color: #ffffff;
+}
+
+
+
