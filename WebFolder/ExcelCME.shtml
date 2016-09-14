@@ -72,6 +72,8 @@ BuscadorIndividual('.selecActual','.DeadDocDate','#Cutt-ofDocSearch');
 
 BuscadorIndividual('.selecActual','.DeadDate','#Cutt-ofSearch');
 
+BuscadorIndividual('.selecActual','.DeadLineVGM','#VGM-ofSearch');
+
 BuscadorIndividual('.selecActual','.ETDdate','#ETDSearch');
 
 BuscadorIndividual('.selecActual','.ETAdate','#ETASearch');
@@ -994,6 +996,6 @@ $('#exportar').live('click',function () {
 </HTML>
 
 <script> 
-$("#input_buscador_individual").hide();
-$("#FiltrosH").hide();
+	$("#input_buscador_individual").hide();
+	$("#FiltrosH").hide();
 </script>

@@ -81,8 +81,8 @@ table.dataTable thead .sorting_asc_disabled,
 table.dataTable thead .sorting_desc_disabled {
 	cursor: pointer;
 	color: #fff;
- 	background-color: #337ab7;
-	border-color: #337ab7;
+ 	background-color: #006394;
+	border-color: #006394;
  
 }
 

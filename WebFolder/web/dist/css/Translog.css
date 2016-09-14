@@ -11,9 +11,22 @@
 .nav > li > a {
   position: relative;
   display: block;
-  padding: 10px 15px;
+  padding: 5px 15px;
   background-color: #ffffff;
+  color: #006394;
 }
 
+.panel-primary > .panel-heading {
+  color: #fff;
+  background-color: #006394;
+  border-color: #006394;
+}
+
+.icono_menu{
+
+    width: 26px;
+    height: 35px;
+
+}
 
 
