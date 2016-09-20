@@ -22,11 +22,15 @@
   border-color: #006394;
 }
 
+.panel-default > .panel-heading {
+  color: #fff;
+  background-color: #006394;
+  border-color: #006394;
+}
+
 .icono_menu{
 
     width: 26px;
     height: 35px;
 
 }
-
-

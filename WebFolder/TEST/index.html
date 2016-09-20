@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>AJAX 01</title>
+</head>
+<body>	
+	<p>Pruebas $4D</p>
+	<div>Tabla:<input type="text" id="table" value=""></div>
+	<span>Campo:<input type="text" id="field" value=""></span>
+	<span>Parametro:<input type="text" id="param" value=""></span>
+	<span><button id="Execute">Execute</button></span>
+	<div>
+	<p id="json.Paginator"></p>
+	<p id="json.Data"></p>
+	</div>
+	<span><button id="FirstPage">First Page</button></span>
+	<span><button id="NextPage">Next Page</button></span>
+	<span><button id="PrevPage">Prev Page</button></span>
+	<span><button id="LastPage">Last Page</button></span>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="4DScript.js"></script>
+	<script>
+
+		//var stament = new Array;
+		//stament.push(new $4D.Stament("id=?","CME000056"));
+		//stament.push(new $4D.Stament("[HOUSE_CME]Client_id2=?","000001")); 
+
+		
+
+
+		$( "#Execute" ).click(function() {
+
+			var tabla = $("#table").val();
+
+			var campo = $("#field").val();
+
+			var param = $("#param").val();
+
+			var query = new $4D.Query(tabla,new $4D.Stament(campo,param),20);
+
+  			query.Execute(function(obj){
+  				console.log("ALGO");
+  				$("#json.Data").append($4D.Table(obj.data));
+			});
+
+		});
+
+		$( "#NextPage" ).click(function() {
+  			query.Execute(function(obj){
+			console.log(obj);});
+		});
+		
+	</script>
+</body>

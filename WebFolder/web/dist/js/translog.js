@@ -1,17 +1,21 @@
 
 
+Validar_Token();
+
+
 Numtab =0;
 
 var $Tc=$('#0019')
 
 $Tc.bind('click',AgregarTabOut);
+$('#LogOut').bind('click',FLog_Out);
 $('#GeneralNavTabs').hide();
 
 
 
 
 	function AgregarTabOut(){
-
+			Validar_Token();
 		$('#GeneralNavTabs').show();
 		$('#welcomePanel').hide();
 		if($('#dataTables-Exchange').length==0){
@@ -31,7 +35,7 @@ $('#GeneralNavTabs').hide();
 	}
 
 	function CerrarTab(argument) {
-		
+			Validar_Token();
 			var id=this.id.replace("btnX", "");
 			$('#tabN'+id).remove();
 			$('#'+this.id).parent().parent().remove();
@@ -48,7 +52,7 @@ $('#GeneralNavTabs').hide();
 	}
 
 	
-    
+
    
 
 

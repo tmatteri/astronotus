@@ -16,6 +16,8 @@
 
 
 
+
+
 function FGeneral(code){
 		//verifico el permiso y de que funcion se trata
 		switch(code){

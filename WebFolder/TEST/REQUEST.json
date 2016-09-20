@@ -1,0 +1,16 @@
+{
+   "table" : "[HOUSE_CME]",
+   "query"	:[
+   				{
+   				"field" : "[HOUSE_CME]client_ID",
+   				"where"	: "=",
+   				"param" :  "0000001"
+   				},
+   				{
+   				"field" : "[HOUSE_CME]client_ID",
+   				"where"	: "=",
+   				"param" :  "0000001"
+   				}
+			]
+
+}
